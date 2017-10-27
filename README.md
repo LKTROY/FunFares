@@ -1,3 +1,1 @@
-# FunFares
-
-a [Sails](http://sailsjs.org) application
+This is my FunFares Application.
