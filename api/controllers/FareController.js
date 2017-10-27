@@ -84,8 +84,12 @@ update: function(req, res) {
 
 search: function (req, res) {
 	if (req.query.searchresult == 1){
+		var dateString = req.query.date.split("-");
+		var startDate = dateString[0];
+		var endDate = dateString[1];
 		Fare.find()
         .where({region: {contains: req.query.region}})
+				.where({"createdAt": {'>': new Date(startDate), '<': new Date(endDate)}})
         .sort('region')
 				.paginate({page: req.query.page, limit: 2})
         .exec( function (err, fares) {
