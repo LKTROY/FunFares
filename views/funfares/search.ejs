@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="row">
+  <div class="col-md-6">
+    <%
+      if (fares != null){
+
+      fares.forEach( function(fare) {
+    %>
+    <div class="card" style="width: 20rem;">
+    <img class="card-img-top" src="..." alt="<%=fare.region %>">
+    <div class="card-body">
+      <h4 class="card-title"><%=fare.city %></h4>
+      <p class="card-text"><%=fare.time %></p>
+      <a href="http://localhost:1337/fare/view/<%=fare.id %>" class="btn btn-primary">View</a>
+    </div>
+  </div>
+  <% });%>
+
+  <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <% if (currentpage != 1){
+      %>
+        <li class="page-item"><a class="page-link" href="http://localhost:1337/fare/search?searchresult=1&page=<%=currentpage-1 %>&region=<%=region %>">Previous</a></li>
+      <%
+    } else {
+      %>
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+    <% } %>
+
+    <% for (i=0; i<pages; i++){ %>
+    <% if (i+1 == currentpage){
+        %>
+        <li class="page-item active">
+          <a class="page-link" href="#"><%=i+1 %><span class="sr-only">(current)</span></a>
+        </li>
+        <%
+      } else {
+        %>
+        <li class="page-item"><a class="page-link" href="http://localhost:1337/fare/search?searchresult=1&page=<%=i+1 %>&region=<%=region %>"><%=i+1 %></a></li>
+        <%
+      }
+      %>
+    <% } %>
+    <% if (currentpage != pages){
+      %>
+        <li class="page-item"><a class="page-link" href="http://localhost:1337/fare/search?serchresult=1&page=<%=currentpage+1 %>&region=<%=region %>">Next</a></li>
+      <%
+    } else {
+      %>
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Next</a>
+      </li>
+    <% } %>
+
+  </ul>
+</nav>
+<% } %>
+</div>
+<div class="col-md-6">
+<form action="/fare/search" method="get">
+  <input type="hidden" name="searchresult" value="1">
+  <input type="hidden" name="page" value="1">
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Region</label>
+    <select class="form-control" name="region">
+      <option value="0">please select region</option>
+      <option value="East Asia">East Asia</option>
+      <option value="South-east Asia">South-east Asia</option>
+      <option value="Americas">Americas</option>
+    </select>
+  </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Date</label>
+        <input class="form-control" type="text" name="date" value=""/>
+        <script type="text/javascript">
+        $(function() {
+
+          $('input[name="Fare[date]"]').daterangepicker({
+              autoUpdateInput: false,
+              locale: {
+                  cancelLabel: 'Clear'
+              }
+          });
+
+          $('input[name="Fare[date]"]').on('apply.daterangepicker', function(ev, picker) {
+              $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+          });
+
+          $('input[name="Fare[date]"]').on('cancel.daterangepicker', function(ev, picker) {
+              $(this).val('');
+          });
+
+        });
+        </script>
+      </div>
+      <button type="submit" class="btn btn-default">search</button>
+    </form>
+</div>
+</div>
+</div>

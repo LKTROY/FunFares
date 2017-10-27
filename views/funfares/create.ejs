@@ -1,0 +1,96 @@
+<script type="text/javascript">
+  var city = [["Osaka","Seoul"], ["Cebu","Singapore"], ["Los Angeles","Boston"]];
+  function changeCity (){
+    with (document.form){
+      var fareRegion = document.getElementById('1');
+      var fareCity = document.getElementById('2');
+      var regionCity = city[fareRegion.selectedIndex - 1];
+      fareCity.length = 1;
+      for (i=0; i<regionCity.length; i++){
+        fareCity[i+1] = new Option(regionCity[i],regionCity[i]);
+      }
+    }
+  }
+</script>
+
+<div class="container">
+<form name="form" action="/fare/create" method="POST">
+
+    <div class="row">
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Region</label>
+    <select class="form-control" name="Fare[region]" id="1" onchange="changeCity()">
+      <option value="0">please selevct region</option>
+      <option value="East Asia">East Asia</option>
+      <option value="South-east Asia">South-east Asia</option>
+      <option value="Americas">Americas</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">City</label>
+    <select class="form-control" name="Fare[city]" id="2">
+      <option value="0">please select city</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Class</label>
+    <select class="form-control" name="Fare[class]" id="exampleFormControlSelect1">
+      <option value="0">please select class</option>
+      <option value="Business">Business</option>
+      <option value="Economy">Economy</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="exampleFormControlInput1">Price</label>
+    <input type="text" class="form-control" name="Fare[price]" id="exampleFormControlInput1" placeholder="">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <label for="exampleFormControlFile1">Image</label>
+    <input type="text" class="form-control" name="Fare[image]" id="exampleFormControlFile1">
+  </div>
+  <div class="col-md-6">
+    <label for="exampleFormControlInput1">Till</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" name="Fare[dealvalidtill]" placeholder="">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <label for="exampleFormControlInput1">Quota</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" name="Fare[quota]" placeholder="">
+  </div>
+  <div class="col-md-6">
+    <label for="exampleFormControlInput1">Date</label>
+    <input type="text" class="form-control" name="Fare[date]" value="" />
+    <script type="text/javascript">
+    $(function() {
+
+      $('input[name="Fare[date]"]').daterangepicker({
+          autoUpdateInput: false,
+          locale: {
+              cancelLabel: 'Clear'
+          }
+      });
+
+      $('input[name="Fare[date]"]').on('apply.daterangepicker', function(ev, picker) {
+          $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+      });
+
+      $('input[name="Fare[date]"]').on('cancel.daterangepicker', function(ev, picker) {
+          $(this).val('');
+      });
+
+    });
+    </script>
+  </div>
+</div>
+
+
+
+
+<button type="submit" class="btn btn-default">submit</button>
+</form>
+</div>

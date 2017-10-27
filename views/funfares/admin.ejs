@@ -1,0 +1,19 @@
+<table class="table">
+  <tr>
+    <td>
+      id
+    </td>
+    <td>
+      Region
+    </td>
+  </tr>
+    <% allFares.forEach( function(fare) { %>
+        <tr>
+          <td><%=fare.id%></td>
+          <td><%=fare.city%></td>
+          <td><a href="http://localhost:1337/fare/update/<%=fare.id %>">Update</a></td>
+          <td><a href="http://localhost:1337/fare/delete/<%=fare.id %>">Delete</a></td>
+        </tr>
+
+    <% }); %>
+</table>
