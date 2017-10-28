@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/styles/normalize.css" />
+<link rel="stylesheet" href="/styles/ion.rangeSlider.css" />
+<link rel="stylesheet" href="/styles/ion.rangeSlider.skinFlat.css" />
 <div class="container">
   <div class="row">
   <div class="col-md-6">
@@ -70,9 +73,42 @@
       <option value="South-east Asia">South-east Asia</option>
       <option value="Americas">Americas</option>
     </select>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Price Range</label>
+          <div>
+              <input type="text" id="price" value="" name="price" />
+          </div>
+
+
+
+
+
+
+      <!-- All JS -->
+      <script src="/js/ion.rangeSlider.js"></script>
+      <script text="javascript">
+
+          $(function () {
+
+              $("#price").ionRangeSlider({
+                  hide_min_max: true,
+                  keyboard: true,
+                  min: 0,
+                  max: 5000,
+                  from: 1000,
+                  to: 4000,
+                  type: 'double',
+                  step: 1,
+                  prefix: "$",
+                  grid: true
+              });
+
+          });
+      </script>
+    </div>
   </div>
       <div class="form-group">
-        <label for="exampleFormControlInput1">Date</label>
+        <label for="exampleFormControlInput1">Date Range</label>
         <input class="form-control" type="text" name="date" value=""/>
         <script type="text/javascript">
         $(function() {
@@ -95,6 +131,7 @@
         });
         </script>
       </div>
+
       <button type="submit" class="btn btn-default">search</button>
     </form>
 </div>

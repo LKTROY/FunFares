@@ -87,9 +87,13 @@ search: function (req, res) {
 		var dateString = req.query.date.split("-");
 		var startDate = dateString[0];
 		var endDate = dateString[1];
+		var priceString = req.query.price.split(" ");
+		var startPrice = priceString[0];
+		var endPrice = priceString[1];
 		Fare.find()
         .where({region: {contains: req.query.region}})
 				.where({"createdAt": {'>': new Date(startDate), '<': new Date(endDate)}})
+				.where({price: {'>': startPrice, '<': endPrice}})
         .sort('region')
 				.paginate({page: req.query.page, limit: 2})
         .exec( function (err, fares) {
