@@ -87,7 +87,7 @@ search: function (req, res) {
 		var dateString = req.query.date.split("-");
 		var startDate = dateString[0];
 		var endDate = dateString[1];
-		var priceString = req.query.price.split(" ");
+		var priceString = req.query.price.split(";");
 		var startPrice = priceString[0];
 		var endPrice = priceString[1];
 		Fare.find()
