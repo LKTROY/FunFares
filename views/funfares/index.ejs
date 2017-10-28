@@ -1,11 +1,15 @@
 <div class="container">
   <div class="row">
     <% allFares.forEach( function(fare) { %>
-    <div class="card" style="width: 20rem;">
+    <div class="card" style="width: 60rem;">
     <img class="card-img-top" src="<%=fare.image %>" alt="<%=fare.region %>">
     <div class="card-body">
       <h4 class="card-title"><%=fare.city %></h4>
-      <p class="card-text"><%=fare.dealvalidtill %></p>
+      <p class="card-text"><%=fare.class %> Class</p>
+      <p class="card-text">$<%=fare.price %></p>
+      <p class="card-text">Deal Valid Till: <%=fare.dealvalidtill %></p>
+      <p class="card-text">Quota Left: <%=fare.quota %></p>
+      <p class="card-text">Date: <%=fare.date %></p>
       <a href="http://localhost:1337/fare/view/<%=fare.id %>" class="btn btn-primary">View</a>
     </div>
   </div>

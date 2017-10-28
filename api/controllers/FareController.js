@@ -93,7 +93,7 @@ search: function (req, res) {
 		Fare.find()
         .where({region: {contains: req.query.region}})
 				.where({"createdAt": {'>': new Date(startDate), '<': new Date(endDate)}})
-				.where({price: {'>': startPrice, '<': endPrice}})
+				.where({price: {'>': parseFloat(startPrice), '<': parseFloat(endPrice)}})
         .sort('region')
 				.paginate({page: req.query.page, limit: 2})
         .exec( function (err, fares) {
