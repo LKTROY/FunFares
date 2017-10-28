@@ -2,7 +2,7 @@
   <div class="row">
     <% allFares.forEach( function(fare) { %>
     <div class="card" style="width: 20rem;">
-    <img class="card-img-top" src="..." alt="<%=fare.region %>">
+    <img class="card-img-top" src="<%=fare.image %>" alt="<%=fare.region %>">
     <div class="card-body">
       <h4 class="card-title"><%=fare.city %></h4>
       <p class="card-text"><%=fare.dealvalidtill %></p>
