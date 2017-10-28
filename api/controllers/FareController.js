@@ -106,5 +106,4 @@ search: function (req, res) {
 		return res.view('funfares/search', {'fares': null});
 	}
 },
-
 };
