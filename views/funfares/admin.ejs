@@ -7,14 +7,34 @@
       Region
     </td>
   </tr>
-  
+
     <% allFares.forEach( function(fare) { %>
         <tr>
           <td><%=fare.id%></td>
           <td><%=fare.city%></td>
-          <td><a href="http://localhost:1337/fare/update/<%=fare.id %>">Update</a></td>
-          <td><a href="http://localhost:1337/fare/delete/<%=fare.id %>">Delete</a></td>
+          <td><a href="http://localhost:1337/fare/update/<%=fare.id %>">Update Fare</a></td>
+          <td><button type="button" onclick="deleteFare('<%=fare.id %>')">Delete Fare</button></td>
+          <td><a href="http://localhost:1337/user/showPurchase/<%=fare.id %>">Bought Users</a></td>
         </tr>
 
     <% }); %>
 </table>
+<script>
+function deleteFare(id) {
+    var r = confirm("Confirm Delete?");
+    if (r == true) {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/fare/delete/" + id, true);
+        xhr.onload = function(e) {
+          alert(this.responseText);
+          location.reload(true);
+        };
+        xhr.send();
+
+    } else {
+        alert("cancelled");
+    }
+
+}
+</script>

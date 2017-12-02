@@ -3,6 +3,7 @@
     <div class="col-md-6">
 <img src="<%=fare.image %>" alt="..." class="img-thumbnail">
 </div>
+
 <div class="col-md-6">
 <ul class="list-group">
   <li class="list-group-item">City: <%=fare.city %></li>
@@ -11,6 +12,24 @@
   <li class="list-group-item">Quota: <%=fare.quota %></li>
   <li class="list-group-item">Till: <%=fare.dealvalidtill %></li>
   <li class="list-group-item">Date: <%=fare.date %></li>
+  <%
+  if (sell == 1){
+
+    if (bought==0){
+      %>
+  <li class="list-group-item"><a href="http://localhost:1337/user/addPackage?pid=<%=fare.id %>">Buy This Package</a></li>
+      <%
+    }else {
+     %>
+  <li class="list-group-item">You Have Bought</li>
+     <%
+    }
+  }else {
+    %>
+  <li class="list-group-item">Sold Out</li>
+    <%
+  }
+  %>
 </ul>
 </div>
 </div>

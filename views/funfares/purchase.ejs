@@ -1,0 +1,18 @@
+<table class="table">
+  <tr>
+    <td>
+      ID
+    </td>
+    <td>
+      Username
+    </td>
+  </tr>
+
+    <% purchase.belongsTo.forEach( function(user) { %>
+        <tr>
+          <td><%=user.id%></td>
+          <td><%=user.username%></td>
+        </tr>
+
+    <% }); %>
+</table>

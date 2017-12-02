@@ -15,6 +15,23 @@
 
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script>
+  function submitForm(oFormElement)
+  {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+      if (xhr.responseText == "login successfully.") {
+        window.location = "/fare/";
+      }
+      else {
+        alert (xhr.responseText);
+      }
+    }
+    xhr.open (oFormElement.method, oFormElement.action, true);
+    xhr.send (new FormData (oFormElement));
+    return false;
+  }
+</script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     <!--
@@ -49,21 +66,63 @@
 
   <body>
 
-    <ul class="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link active" href="http://localhost:1337/fare/">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="http://localhost:1337/fare/search">Search</a>
       </li>
+      <%
+      if (req.session != null){
+        if (req.session.userid != null){
+          if (req.session.username == "admin"){
+      %>
       <li class="nav-item">
         <a class="nav-link" href="http://localhost:1337/fare/create">Create</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" href="http://localhost:1337/fare/admin">Admin</a>
       </li>
+      <%
+        }else{
+      %>
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:1337/user/showPackage">Package</a>
+      </li>
+      <%
+        }
+      %>
     </ul>
-
+    <form class="form-inline my-2 my-lg-0" action="/user/logout">
+      <%=req.session.username %>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+    </form>
+      <%
+      }else{
+      %>
+      <form class="form-inline my-2 my-lg-0" action="/user/login" onsubmit="return submitForm(this);" method="POST">
+      <input class="form-control mr-sm-2" name="username" type="search" placeholder="Username" aria-label="Search">
+      <input class="form-control mr-sm-2" name="password" type="search" placeholder="Password" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+    </form>
+      <%
+      }
+    }else{
+      %>
+      <form class="form-inline my-2 my-lg-0" action="/user/login" onsubmit="return submitForm(this);" method="POST">
+      <input class="form-control mr-sm-2" name="username" type="search" placeholder="Username" aria-label="Search">
+      <input class="form-control mr-sm-2" name="password" type="search" placeholder="Password" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+    </form>
+      <%
+    }
+      %>
+  </div>
+  </nav>
     <div class="jumbotron">
     <h1 class="display-3">FunFares</h1>
     <hr class="my-4">
@@ -101,7 +160,7 @@
     -->
 
     <!--TEMPLATES-->
-
+    
     <!--TEMPLATES END-->
 
 

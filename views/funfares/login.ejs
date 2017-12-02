@@ -1,0 +1,28 @@
+<form action="/user/login" method="POST" onsubmit="return submitForm(this);">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Name</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="username">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+  </div>
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+<script>
+  function submitForm(oFormElement)
+  {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+      if (xhr.responseText == "login successfully.") {
+        window.location = "/fare/";
+      }
+      else {
+        alert (xhr.responseText);
+      }
+    }
+    xhr.open (oFormElement.method, oFormElement.action, true);
+    xhr.send (new FormData (oFormElement));
+    return false;
+  }
+</script>

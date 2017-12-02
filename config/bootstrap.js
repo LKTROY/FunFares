@@ -13,5 +13,28 @@ module.exports.bootstrap = function(cb) {
 
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
+
+  var bcrypt = require('bcrypt');
+  var salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync("123456", salt);
+
+  var user = {"username": "admin", "password": hash}
+
+  User.create(user).exec( function (err, model)  {
+
+      model.save();
+
+  });
+
+  var hash = bcrypt.hashSync("123456", salt);
+
+  var user = {"username": "boss", "password": hash}
+
+  User.create(user).exec( function (err, model)  {
+
+      model.save();
+
+  });
+
   cb();
 };

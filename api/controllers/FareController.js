@@ -38,24 +38,34 @@ admin: function(req, res) {
 
 view: function (req, res) {
     Fare.findOne(req.params.id).exec( function(err, fare) {
-        if (fare != null)
-            return res.view('funfares/single', {'fare': fare});
+        if (fare != null) {
+					Fare.findOne(req.params.id).populateAll().exec( function (err, model) {
+						console.log(fare.quota);
+             	if (parseInt(model.belongsTo.length) < parseInt(fare.quota)){
+	            return res.view('funfares/single', {'fare': fare, 'bought': req.query.bought, 'sell':1});
+							}else {
+	            return res.view('funfares/single', {'fare': fare, 'bought': req.query.bought, 'sell':0});
+							}
+    			});
+				}
         else
             return res.send("No such fare");
     });
 },
 
 delete: function(req, res) {
+	if (req.method == "GET"){
+		res.redirect("/fare");
+	} else{
    Fare.findOne(req.params.id).exec( function(err, fare) {
         if (fare != null) {
             fare.destroy();
-						Fare.find().exec( function(err, allFares) {
-        return res.view('funfares/admin', {'allFares': allFares});
-    });
+						return res.send("Delete!");
         } else {
             return res.send("Fare not found");
         }
     });
+	}
 },
 
 update: function(req, res) {

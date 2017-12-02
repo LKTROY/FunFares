@@ -21,7 +21,9 @@
     "include-all": "^1.0.0",
     "rc": "1.0.1",
     "sails": "~0.12.14",
-    "sails-disk": "~0.10.9"
+    "sails-disk": "~0.10.9",
+    "bcrypt": "~1.0.3",
+    "sails-mongo": "~0.12.2"
   },
   "scripts": {
     "debug": "node debug app.js",

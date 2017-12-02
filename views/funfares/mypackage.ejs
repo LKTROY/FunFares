@@ -1,0 +1,43 @@
+<table class="table">
+  <tr>
+    <td>
+      ID
+    </td>
+    <td>
+      Destination
+    </td>
+    <td>
+      Date
+    </td>
+    <td>
+      Remove
+    </td>
+  </tr>
+
+    <% myPackage.purchase.forEach( function(fare) { %>
+        <tr>
+          <td><%=fare.id%></td>
+          <td><button type="button" onclick="http://localhost:1337/fare/view/<%=fare.id %>?bought=1"><%=fare.city %></button></td>
+          <td><%=fare.date%></td>
+          <td><button type="button" onclick="removePackage('<%=fare.id %>')">RemovePackage</button></td>
+        </tr>
+
+    <% }); %>
+</table>
+<script>
+function removePackage(id) {
+    var r = confirm("Confirm Delete?");
+    if (r == true) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/user/removePackage/" + id, true);
+        xhr.onload = function(e) {
+          alert(this.responseText);
+          location.reload(true);
+        };
+        xhr.send();
+    } else {
+        alert("cancelled");
+    }
+
+}
+</script>

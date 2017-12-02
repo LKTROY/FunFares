@@ -11,7 +11,7 @@
       <p class="card-text">Deal Valid Till: <%=fare.dealvalidtill %></p>
       <p class="card-text">Quota Left: <%=fare.quota %></p>
       <p class="card-text">Date: <%=fare.date %></p>
-      <a href="http://localhost:1337/fare/view/<%=fare.id %>" class="btn btn-primary">View</a>
+      <a href="http://localhost:1337/fare/view/<%=fare.id %>?bought=0" class="btn btn-primary">View</a>
     </div>
   </div>
   <% }); %>
